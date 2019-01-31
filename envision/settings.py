@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'backend',
+    'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -76,8 +79,12 @@ WSGI_APPLICATION = 'envision.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'db_envision',
+        'USER': 'root',
+        'PASSWORD': 'DWY5201314',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 
@@ -122,3 +129,11 @@ STATIC_URL = '/static/'
 
 # Cors plugin config
 CORS_ORIGIN_ALLOW_ALL = True
+
+REST_FRAMEWORK = {
+    # 配置全局分页类型和每页数量
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    # 配置过滤器
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+}
